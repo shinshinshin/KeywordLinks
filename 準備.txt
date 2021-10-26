@@ -1,0 +1,15 @@
+1,pythonをインストールする
+	windowsの検索欄に cmd と入力しコマンドプロンプトを立ち上げる
+	コマンドプロンプトに python と入力し、立ち上がった windows store から python をインストールする
+	インストールの際には Add Python 3.9 to PATH のチェックを入れること
+2,python に必要なツールをインストールする
+	デスクトップ上で Shift を押しながら右クリックして PowerShell を開き
+	pip install xlwings xlrd openpyxl beautifulsoup4 urllib3
+	とコマンドを打つ
+3,excel に xlwings の設定をする
+	PowerShell で
+	xlwings addin install
+	と打つ
+
+
+	

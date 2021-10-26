@@ -2,7 +2,6 @@ import xlwings as xw
 from bs4 import BeautifulSoup
 import urllib3
 import urllib.parse as urlparse
-import re
 
 
 class Page:
