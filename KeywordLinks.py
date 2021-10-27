@@ -2,6 +2,7 @@ import xlwings as xw
 from bs4 import BeautifulSoup
 import urllib3
 import urllib.parse as urlparse
+import re
 
 
 class Page:
@@ -28,7 +29,7 @@ def get_page(domain, url, keywords, d_num):
 
     http = urllib3.PoolManager()
     html = http.request('GET', url)
-    soup = BeautifulSoup(html.data)
+    soup = BeautifulSoup(html.data, 'html.parser')
     links = filter(lambda link: link.find('tel:') != 0, [
                    a['href'] for a in soup.find_all('a', href=True)])
     links2 = []
@@ -46,9 +47,11 @@ def get_page(domain, url, keywords, d_num):
     description_tag = soup.find('meta', attrs={'name': 'description'})
     description = description_tag['content'] if description_tag is not None else ''
 
+    for tag in soup.find_all('a'):
+        tag.decompose()
     hit_words = []
     for keyword in keywords:
-        if soup.find(text=keyword):
+        if soup.find(text=re.compile(keyword)):
             hit_words.append(keyword)
 
     if len(hit_words) > 0:
